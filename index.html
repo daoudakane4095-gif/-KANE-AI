@@ -1,36 +1,492 @@
-KANE AI
-YOUR PHOTO. YOUR VISION.
-ÉDITION PREMIUM
-STUDIO CRÉATIF INTELLIGENT
-Donne vie à tes idées.
-Prépare une scène vidéo à partir de ta photo, construis un prompt détaillé et conserve tes réglages sur cet appareil.
-01Ta photo
-＋
-Choisir une photo
-JPG, PNG ou WEBP
-Description du personnage ou du sujet
-L’image est affichée localement dans ton navigateur. L’analyse automatique par IA nécessitera de connecter un modèle de vision.
-02Construis ta scène
-Que doit-il se passer ?
-Décor
-Style visuel
-Ultra-réaliste et cinématographiqueFilm publicitaire de luxeAnimation 3D réalisteClip musical dynamiqueDocumentaire naturelAnime cinématographique
-Durée souhaitée
-5 secondes10 secondes15 secondes30 secondes
-Format
-9:16 — vertical16:9 — paysage1:1 — carré
-Mouvement de caméra
-Automatique selon l’actionCaméra stable avec léger travelling avantZoom avant doux sur le sujetTravelling latéral fluideInclinaison verticale douceOrbite lente autour du sujetCaméra à l’épaule, mouvement naturel
-✦ CRÉER MON PROMPT VIDÉO
-03Ton prompt KANE AI
-Ton prompt apparaîtra ici après avoir créé ta scène.
-Copier le prompt
-Enregistrer mes réglages
-Effacer
-Génération vidéo : le moteur vidéo n’est pas encore connecté. Cette version prépare un prompt prêt à envoyer à un service compatible ; elle ne génère pas encore de vidéo.
-04Ma mémoire créative
-Préférences enregistrées
-Mouvements de caméra
-Cohérence du personnage
-Les réglages sauvegardés restent dans le navigateur de cet appareil. Ils ne sont pas automatiquement synchronisés avec Google Drive.
-KANE AI © Studio créatif — Interface autonome
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090909">
+<title>KANE AI — Studio vidéo</title>
+
+<style>
+:root {
+  --bg:#080808;
+  --gold:#d9ad62;
+  --gold2:#f3d79e;
+  --muted:#aaa39a;
+  --line:#493923;
+  --white:#f7f4ee;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:radial-gradient(ellipse at 50% -20%,#382714 0,transparent 48%),var(--bg);
+  color:var(--white);
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+}
+header {
+  padding:18px;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  background:#090909ed;
+  backdrop-filter:blur(12px);
+  z-index:2;
+}
+.top {
+  max-width:960px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand {
+  font-weight:900;
+  letter-spacing:3px;
+  color:var(--gold2);
+  font-size:22px;
+}
+.tag {
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--muted);
+}
+.status {
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:7px 10px;
+  color:var(--gold2);
+  font-size:11px;
+}
+main {
+  max-width:960px;
+  margin:auto;
+  padding:22px 15px 50px;
+}
+.hero {
+  text-align:center;
+  padding:25px 8px;
+}
+.eyebrow {
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:10px;
+  font-weight:800;
+}
+.hero h1 {
+  font-size:clamp(32px,7vw,52px);
+  margin:10px 0;
+  background:linear-gradient(100deg,#fff1cf,#d9ad62,#fff);
+  color:transparent;
+  background-clip:text;
+}
+.hero p {
+  color:var(--muted);
+  font-size:14px;
+  max-width:540px;
+  margin:auto;
+  line-height:1.6;
+}
+.grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.card {
+  background:linear-gradient(145deg,#191919,#0e0e0e);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:17px;
+  box-shadow:0 12px 35px #0005;
+}
+.card h2 {
+  font-size:15px;
+  margin:0 0 14px;
+}
+.num {
+  color:var(--gold);
+  margin-right:8px;
+}
+.upload {
+  display:block;
+  border:1px dashed #9b7544;
+  border-radius:13px;
+  padding:22px 12px;
+  text-align:center;
+  background:#0b0b0b;
+  cursor:pointer;
+}
+.upload strong {
+  display:block;
+  margin:8px 0 5px;
+}
+.upload small { color:var(--muted); }
+input[type=file] { display:none; }
+.preview {
+  display:none;
+  margin-top:12px;
+}
+.preview img {
+  width:100%;
+  max-height:320px;
+  object-fit:contain;
+  border-radius:10px;
+  background:#050505;
+}
+.field { margin:12px 0; }
+.field label {
+  display:block;
+  font-size:12px;
+  color:var(--gold2);
+  margin-bottom:7px;
+}
+textarea,input[type=text],select {
+  width:100%;
+  background:#090909;
+  border:1px solid #37302a;
+  border-radius:10px;
+  color:var(--white);
+  padding:12px;
+  font:inherit;
+  font-size:14px;
+}
+textarea {
+  min-height:82px;
+  resize:vertical;
+}
+.row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+button {
+  border:0;
+  border-radius:11px;
+  padding:13px 15px;
+  font-weight:800;
+  cursor:pointer;
+  font-size:13px;
+}
+.primary {
+  width:100%;
+  background:linear-gradient(100deg,#b98136,#f0d59c);
+  color:#17110a;
+}
+.secondary {
+  background:#211b13;
+  color:var(--gold2);
+  border:1px solid var(--line);
+}
+.actions {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.actions button { flex:1; }
+.output {
+  white-space:pre-wrap;
+  background:#080808;
+  border:1px solid #393026;
+  border-radius:11px;
+  padding:14px;
+  color:#e9dfcd;
+  font-size:13px;
+  line-height:1.6;
+  min-height:90px;
+  overflow-wrap:anywhere;
+}
+.notice {
+  font-size:12px;
+  line-height:1.6;
+  color:#c9bda9;
+  background:#17130e;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:12px;
+  margin-top:12px;
+}
+.chips {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.chip {
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:7px 10px;
+  font-size:11px;
+  color:var(--gold2);
+}
+footer {
+  text-align:center;
+  color:#777;
+  font-size:11px;
+  padding:22px;
+}
+@media(min-width:740px) {
+  .grid { grid-template-columns:1fr 1fr; }
+  .wide { grid-column:1/-1; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top">
+    <div>
+      <div class="brand">KANE AI</div>
+      <div class="tag">YOUR PHOTO. YOUR VISION.</div>
+    </div>
+    <div class="status">ÉDITION PREMIUM</div>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="eyebrow">STUDIO CRÉATIF INTELLIGENT</div>
+  <h1>Donne vie à tes idées.</h1>
+  <p>Prépare une scène vidéo à partir de ta photo, construis un prompt détaillé et conserve tes réglages sur cet appareil.</p>
+</section>
+
+<div class="grid">
+
+<section class="card">
+  <h2><span class="num">01</span>Ta photo</h2>
+
+  <label class="upload" for="photo">
+    <div style="font-size:28px">＋</div>
+    <strong>Choisir une photo</strong>
+    <small>JPG, PNG ou WEBP</small>
+  </label>
+
+  <input id="photo" type="file" accept="image/*">
+
+  <div class="preview" id="preview">
+    <img id="photoPreview" alt="Aperçu de la photo">
+    <div class="notice" id="photoInfo"></div>
+  </div>
+
+  <div class="field">
+    <label for="subject">Description du personnage ou du sujet</label>
+    <textarea id="subject" placeholder="Ex. : un jeune homme assis sur un canapé, portant une chemise noire…"></textarea>
+  </div>
+
+  <div class="notice">
+    L’image est affichée localement dans ton navigateur. L’analyse automatique par IA nécessitera de connecter un modèle de vision.
+  </div>
+</section>
+
+<section class="card">
+  <h2><span class="num">02</span>Construis ta scène</h2>
+
+  <div class="field">
+    <label for="action">Que doit-il se passer ?</label>
+    <textarea id="action" placeholder="Ex. : le personnage se lève doucement et regarde la caméra."></textarea>
+  </div>
+
+  <div class="field">
+    <label for="decor">Décor</label>
+    <input id="decor" type="text" placeholder="Ex. : intérieur moderne et élégant">
+  </div>
+
+  <div class="field">
+    <label for="style">Style visuel</label>
+    <select id="style">
+      <option>Ultra-réaliste et cinématographique</option>
+      <option>Film publicitaire de luxe</option>
+      <option>Animation 3D réaliste</option>
+      <option>Clip musical dynamique</option>
+      <option>Documentaire naturel</option>
+      <option>Anime cinématographique</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label for="duration">Durée souhaitée</label>
+      <select id="duration">
+        <option>5 secondes</option>
+        <option>10 secondes</option>
+        <option>15 secondes</option>
+        <option>30 secondes</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="format">Format</label>
+      <select id="format">
+        <option>9:16 — vertical</option>
+        <option>16:9 — paysage</option>
+        <option>1:1 — carré</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="camera">Mouvement de caméra</label>
+    <select id="camera">
+      <option value="Automatique">Automatique selon l’action</option>
+      <option>Caméra stable avec léger travelling avant</option>
+      <option>Zoom avant doux sur le sujet</option>
+      <option>Travelling latéral fluide</option>
+      <option>Inclinaison verticale douce</option>
+      <option>Orbite lente autour du sujet</option>
+      <option>Caméra à l’épaule, mouvement naturel</option>
+    </select>
+  </div>
+
+  <button class="primary" id="build">✦ CRÉER MON PROMPT VIDÉO</button>
+</section>
+
+<section class="card wide">
+  <h2><span class="num">03</span>Ton prompt KANE AI</h2>
+
+  <div class="output" id="result">
+    Ton prompt apparaîtra ici après avoir créé ta scène.
+  </div>
+
+  <div class="actions">
+    <button class="secondary" id="copy">Copier le prompt</button>
+    <button class="secondary" id="save">Enregistrer mes réglages</button>
+    <button class="secondary" id="clear">Effacer</button>
+  </div>
+
+  <div class="notice">
+    <strong>Génération vidéo :</strong> le moteur vidéo n’est pas encore connecté. Cette version prépare un prompt prêt à envoyer à un service compatible ; elle ne génère pas encore de vidéo.
+  </div>
+</section>
+
+<section class="card wide">
+  <h2><span class="num">04</span>Ma mémoire créative</h2>
+
+  <div class="chips">
+    <span class="chip">Préférences enregistrées</span>
+    <span class="chip">Mouvements de caméra</span>
+    <span class="chip">Cohérence du personnage</span>
+  </div>
+
+  <p style="color:#aaa;font-size:12px;line-height:1.6">
+    Les réglages sauvegardés restent dans le navigateur de cet appareil. Ils ne sont pas automatiquement synchronisés avec Google Drive.
+  </p>
+</section>
+
+</div>
+</main>
+
+<footer>KANE AI © Studio créatif — Interface autonome</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+let photoUrl = null;
+
+$('photo').addEventListener('change', e => {
+  const f = e.target.files && e.target.files[0];
+  if (!f) return;
+
+  if (photoUrl) URL.revokeObjectURL(photoUrl);
+
+  photoUrl = URL.createObjectURL(f);
+  $('photoPreview').src = photoUrl;
+  $('preview').style.display = 'block';
+
+  $('photoInfo').textContent =
+    `Photo chargée : ${f.name} · ${(f.size/1048576).toFixed(2)} Mo`;
+});
+
+function cameraFor(action, choice) {
+  if (choice !== 'Automatique') return choice;
+
+  const a = action.toLowerCase();
+
+  if (a.includes('lève') || a.includes('lever') || a.includes('debout'))
+    return 'Inclinaison verticale douce accompagnant le personnage qui se lève.';
+
+  if (a.includes('marche') || a.includes('avance') || a.includes('court'))
+    return 'Travelling fluide accompagnant le déplacement du personnage.';
+
+  if (a.includes('danse'))
+    return 'Caméra mobile avec un léger mouvement circulaire, fluide et rythmé.';
+
+  if (a.includes('sourit') || a.includes('regarde'))
+    return 'Zoom avant doux pour mettre en valeur le visage.';
+
+  return 'Caméra stable avec un léger mouvement cinématographique.';
+}
+
+function makePrompt() {
+  const subject = $('subject').value.trim() || 'Sujet de la photo fournie';
+  const action = $('action').value.trim() || 'Le sujet effectue un mouvement naturel et fluide.';
+  const decor = $('decor').value.trim() || 'Conserver le décor cohérent avec la photo d’origine';
+  const camera = cameraFor(action, $('camera').value);
+
+  return `KANE AI — PROMPT VIDÉO
+
+IMAGE DE RÉFÉRENCE : utiliser la photo fournie comme référence visuelle.
+PERSONNAGE / SUJET : ${subject}
+ACTION : ${action}
+DÉCOR : ${decor}
+STYLE : ${$('style').value}
+CAMÉRA : ${camera}
+DURÉE SOUHAITÉE : ${$('duration').value}
+FORMAT : ${$('format').value}
+
+CONSIGNES :
+- Préserver autant que possible le visage, l’identité visuelle, les vêtements et les caractéristiques du sujet.
+- Garder une anatomie réaliste et des mouvements naturels.
+- Éviter les déformations, les changements de visage et les objets incohérents.
+- Respecter la lumière, la perspective et la continuité de la scène.
+- Produire un mouvement fluide avec une caméra maîtrisée.
+
+Créer une seule scène cohérente à partir de l’image de référence.`;
+}
+
+$('build').addEventListener('click', () => {
+  $('result').textContent = makePrompt();
+});
+
+$('copy').addEventListener('click', async () => {
+  const t = $('result').textContent;
+
+  if (t.startsWith('Ton prompt apparaîtra')) {
+    alert('Crée d’abord ton prompt.');
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(t);
+    alert('Prompt copié !');
+  } catch(e) {
+    alert('La copie automatique n’est pas disponible sur ce navigateur. Sélectionne le texte pour le copier.');
+  }
+});
+
+$('save').addEventListener('click', () => {
+  const d = {};
+
+  ['subject','action','decor','style','duration','format','camera'].forEach(k => {
+    d[k] = $(k).value;
+  });
+
+  localStorage.setItem('kane-ai-settings', JSON.stringify(d));
+  alert('Réglages enregistrés sur cet appareil.');
+});
+
+$('clear').addEventListener('click', () => {
+  $('result').textContent = 'Ton prompt apparaîtra ici après avoir créé ta scène.';
+});
+
+try {
+  const d = JSON.parse(localStorage.getItem('kane-ai-settings') || 'null');
+
+  if (d) {
+    Object.keys(d).forEach(k => {
+      if ($(k)) $(k).value = d[k];
+    });
+  }
+} catch(e) {}
+</script>
+
+</body>
+</html>
